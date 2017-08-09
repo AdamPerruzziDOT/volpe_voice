@@ -101,7 +101,7 @@ def properCategory(link,categories):
                 correct += 'Sponsor=' #Add the correct entity label
             correct += target #Add the actual dashboard item to the end of the correct link
             return [False,correct,cleanCategory(category.lower()),target] #Indicate the item is not properly linked, return the correct version
-    elif category not in ['project-all','staff']: #Link points to an unrecognized object
+    elif category not in ['Project-all','Staff']: #Link points to an unrecognized object
         return [False,'',cleanCategory(category.lower()),target] #Indicate the item is not properly linked, and there is no available correction
     else: #Link points to Project or Staff
         return [True,'',cleanCategory(category.lower()),target]
@@ -109,7 +109,6 @@ def properCategory(link,categories):
 
 ###Returns the proper category name, based on the link category name
 def cleanCategory(category):
-    print(category)
     if category == 'tech-center-all':
         return 'Tech Center'
     elif category == 'division-all':
@@ -216,7 +215,7 @@ if __name__ == '__main__':
                 
                 
                 ###Check proper categorization
-                categoryEval = properCategory(link.get('href').lower(),categories) #Retrieve categorization status of the link, along with any corrections
+                categoryEval = properCategory(link.get('href'),categories) #Retrieve categorization status of the link, along with any corrections
                 if not categoryEval[0]: #If the link was not properly categorized
                     errors.append({'Page Number': num, 'Link': url_str, 'Type': 'Link', 'Problem': link.get('href'), 'Correction': categoryEval[1]}) #Store in error list
                 
@@ -257,7 +256,6 @@ if __name__ == '__main__':
                     ###Get concordance
                     concord = '' #String that will eventually become the surrounding summary text
                     for i in range(0,len(pageSent)): #For each of the sentences on the page
-                        
                         
                         ###Generate text to pull concordance from
                         if searchTerm in pageSent[i]: #If the current sentence contains the search term
@@ -327,7 +325,6 @@ if __name__ == '__main__':
                             break #Exit, once the sentence containing the search term has been found
                         elif i == (len(pageSent)-1): #Did not find the search term in any sentence
                             errors.append({'Page Number': num, 'Link': url_str, 'Type': 'Concordance', 'Problem': searchTerm, 'Correction': ''}) #Store in list of errors
-                    
                     
                     ###Add all fields of interest to print string
                     str_print += str(categoryEval[2]) + '|' + str(categoryEval[3]) #Add category information to print string
