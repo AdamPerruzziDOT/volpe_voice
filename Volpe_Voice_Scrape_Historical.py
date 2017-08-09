@@ -102,7 +102,7 @@ def properCategory(link,categories):
                 correct += 'Sponsor=' #Add the correct entity label
             correct += target #Add the actual dashboard item to the end of the correct link
             return [False,correct,cleanCategory(category.lower()),target] #Indicate the item is not properly linked, return the correct version
-    elif category not in ['project-all','staff']: #Link points to an unrecognized object
+    elif category not in ['Project-all','Staff']: #Link points to an unrecognized object
         return [False,'',cleanCategory(category.lower()),target] #Indicate the item is not properly linked, and there is no available correction
     else: #Link points to Project or Staff
         return [True,'',cleanCategory(category.lower()),target]
